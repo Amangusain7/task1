@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from newtask import views
+# from newtask import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
-    path('usersDetails',views.user_info),
+    path('usersDetails',include('newtask.urls')),
 ]

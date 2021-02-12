@@ -16,5 +16,5 @@ def user_info(request):
 
     todo = users.objects.get(pk=1)
     d = userSerializer(todo)
-    print(d.data,"15555555555555555")
+    d.data
     return Response({"data":d.data}) 
