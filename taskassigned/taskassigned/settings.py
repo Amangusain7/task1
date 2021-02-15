@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newtask',
+    'crud_with_apiviews',
+    'crud_with_serializers',
     'rest_framework',
 ]
 
