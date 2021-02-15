@@ -21,4 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path('usersDetails',include('newtask.urls')),
+    path('go',include('crud_with_apiviews.urls')),
+
 ]

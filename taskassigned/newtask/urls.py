@@ -5,5 +5,5 @@ from newtask import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls), 
-    path('',views.user_info),
+    path('',views.user_details.as_view()),
 ]
