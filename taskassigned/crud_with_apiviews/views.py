@@ -12,19 +12,27 @@ class detailslist(APIView):
     
     def get(self, request):
         
-        li = userlogin.objects.all()
-        serializer = infoSerializer(li,many=True)
-        return Response({"info":serializer.data})
+        email_id = request.GET.get('email_id')
+        id = request.GET.get('id')
         
-        # li = userlogin(f_name="aman",l_name="gusain",DOB="1999-2-24",gender="MALE",email_id="aman@gusain",phone_no=80000500011,password="844#abc")
-        # li.save()
-        # return Response(li.id)
+        if id:
+            li = userlogin.objects.get(id=id)
+            serializer = infoSerializer(li)
+            return Response(serializer.data)
 
-        # li = userlogin.objects.get(pk=4)
-        # a = infoSerializer(li)
-        # return Response({"data":a.data})
+        elif email_id:
+            li = userlogin.objects.get(email_id=email_id)
+            serializer = infoSerializer(li)
+            return Response(serializer.data)
 
+        else:
+            li = userlogin.objects.all()
+            serializer = infoSerializer(li,many=True)
+            return Response(serializer.data)
+
+    
     def post(self,request):
+
         serializer = infoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -32,29 +40,29 @@ class detailslist(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-    def get_object(self, pk):
-        try:
-            return userlogin.objects.get(pk=pk)
-        except userlogin.DoesNotExist:
-            raise Http404
 
-    
-    def put(self,request,pk):
-        li = self.get_object(pk)
-        # a = get_object_or_404(userlogin.objects.all(),pk=pk)
-        # a = self.get_object(pk)
-        # data = request.data.get('a')
-        serializer = infoSerializer(li, data=data, partial=True)
-        # b = infoSerializer(instance=a, data=request.data)
-
-        if b.is_valid():
-            b.save()
-            return Response(b.data)
-        return Response(b.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self,request):
+        
+        id = request.GET.get('id')
+        if id:
+            li = userlogin.objects.get(id=id)
+            serializer = infoSerializer(li, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response("please enter a valid id")
 
         
     def delete(self, request):
+        
+        email_id = request.GET.get('email_id')
+        id = request.GET.get('id')
+        if id:
+            deleteUserData = userlogin.objects.get(id=id)
+            deleteUserData.delete()
 
-        deleteUserData = userlogin.objects.all().delete()
-        print(deleteUserData,'@@@@@@@@@@@@@@@@@@@@')
-        return Response('DELETED')
+        elif email_id:
+            deleteUserData = userlogin.objects.get(email_id=email_id)
+            deleteUserData.delete()

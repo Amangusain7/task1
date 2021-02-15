@@ -15,7 +15,6 @@ class infoSerializer(serializers.ModelSerializer):
         instance.l_name = validated_data.get('l_name', instance.l_name)
         instance.DOB = validated_data.get('DOB', instance.DOB)
         instance.gender = validated_data.get('gender', instance.gender)
-        instance.email_id = validated_data.get('email_id', instance.email_id)
         instance.phone_no = validated_data.get('phone_no', instance.phone_no)
         instance.password = validated_data.get('password', instance.password)
 
