@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('usersDetails',include('newtask.urls')),
     path('go',include('crud_with_apiviews.urls')),
+    path('wwe',include('crud_without_serializers.urls')),
 
 ]
