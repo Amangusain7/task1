@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newtask',
     'crud_with_apiviews',
-    'crud_with_serializers',
+    'crud_without_serializers',
     'rest_framework',
 ]
 
